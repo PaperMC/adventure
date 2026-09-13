@@ -163,11 +163,8 @@ public interface ShadowColor extends StyleBuilderApplicable, ARGBLike {
     if (!hex.startsWith("#")) return null;
 
     try {
-      final int r = Integer.parseInt(hex.substring(1, 3), 16);
-      final int g = Integer.parseInt(hex.substring(3, 5), 16);
-      final int b = Integer.parseInt(hex.substring(5, 7), 16);
-      final int a = Integer.parseInt(hex.substring(7, 9), 16);
-      return new ShadowColorImpl((a << 24) | (r << 16) | (g << 8) | b);
+      final int rgba = Integer.parseUnsignedInt(hex, 1, 9, 16);
+      return new ShadowColorImpl(Integer.rotateRight(rgba, 8));
     } catch (final NumberFormatException ignored) {
       return null;
     }
