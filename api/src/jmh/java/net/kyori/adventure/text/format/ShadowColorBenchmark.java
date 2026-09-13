@@ -43,11 +43,11 @@ import org.openjdk.jmh.annotations.Warmup;
 @Measurement(iterations = 3, time = 3)
 public class ShadowColorBenchmark {
 
-    @Param(value = {"#AABBCCDD","#12345678",})
-    private String hexString;
+  @Param(value = {"#AABBCCDD", "#12345678"})
+  private String hexString;
 
-    @Benchmark
-    public ShadowColor fromHexString() {
-        return ShadowColor.fromHexString(hexString);
-    }
+  @Benchmark
+  public ShadowColor fromHexString() {
+    return ShadowColor.fromHexString(this.hexString);
+  }
 }
