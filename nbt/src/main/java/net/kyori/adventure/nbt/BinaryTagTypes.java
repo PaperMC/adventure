@@ -114,7 +114,7 @@ public final class BinaryTagTypes {
       for (int i = 0; i < length; i++) {
         tags.add(type.read(input));
       }
-      return ListBinaryTag.listBinaryTag(type, tags);
+      return ListBinaryTag.listBinaryTag(type, tags).unwrapHeterogeneity();
     }
   }, (rawTag, output) -> {
     final ListBinaryTag tag = rawTag.wrapHeterogeneity();
