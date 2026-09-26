@@ -43,11 +43,11 @@ class KeyFormatTest {
   @SuppressWarnings("PatternValidation") // We are testing to ensure this throws an exception.
   @Test
   void testNamespaceBuilder() {
-    final KeyFormat format = KeyFormat.namespace("adventure");
+    final KeyFormat format = KeyFormat.keyFormat("adventure");
     assertEquals("adventure", format.namespace());
     assertEquals(Key.DEFAULT_SEPARATOR, format.separator());
-    assertThrows(IllegalArgumentException.class, () -> KeyFormat.namespace("Adventure"));
-    assertThrows(IllegalArgumentException.class, () -> KeyFormat.namespace(".."));
+    assertThrows(IllegalArgumentException.class, () -> KeyFormat.keyFormat("Adventure"));
+    assertThrows(IllegalArgumentException.class, () -> KeyFormat.keyFormat(".."));
   }
 
   @Test

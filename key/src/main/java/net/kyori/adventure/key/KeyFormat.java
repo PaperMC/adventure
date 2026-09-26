@@ -68,12 +68,12 @@ public sealed interface KeyFormat extends Namespaced permits KeyFormatImpl {
    * @param namespaced the namespaced instance to get the namespace from
    * @return the key format
    * @throws IllegalArgumentException if the namespace contains an invalid character
-   * @see #namespace(String)
+   * @see #keyFormat(String)
    * @since 5.2.0
    */
   @SuppressWarnings("PatternValidation") // The namespace is tested later.
-  static KeyFormat namespace(final Namespaced namespaced) {
-    return namespace(requireNonNull(namespaced, "namespaced").namespace());
+  static KeyFormat keyFormat(final Namespaced namespaced) {
+    return keyFormat(requireNonNull(namespaced, "namespaced").namespace());
   }
 
   /**
@@ -84,7 +84,7 @@ public sealed interface KeyFormat extends Namespaced permits KeyFormatImpl {
    * @throws IllegalArgumentException if the namespace contains an invalid character
    * @since 5.2.0
    */
-  static KeyFormat namespace(@KeyPattern.Namespace final String namespace) {
+  static KeyFormat keyFormat(@KeyPattern.Namespace final String namespace) {
     return keyFormat(namespace, Key.DEFAULT_SEPARATOR);
   }
 
