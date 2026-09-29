@@ -82,6 +82,14 @@ final class ArgumentQueueImpl<T extends Tag.Argument> implements ArgumentQueue {
   }
 
   @Override
+  public void requireNoMoreArguments(final String errorMessage) {
+    requireNonNull(errorMessage, "errorMessage");
+    if (this.hasNext()) {
+      throw this.context.newException(errorMessage, this);
+    }
+  }
+
+  @Override
   public void reset() {
     this.ptr = 0;
   }
