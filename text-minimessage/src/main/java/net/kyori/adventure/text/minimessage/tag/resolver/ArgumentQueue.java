@@ -24,6 +24,7 @@
 package net.kyori.adventure.text.minimessage.tag.resolver;
 
 import java.util.function.Supplier;
+import net.kyori.adventure.text.minimessage.ParsingException;
 import net.kyori.adventure.text.minimessage.tag.Tag;
 import org.jetbrains.annotations.ApiStatus;
 import org.jspecify.annotations.Nullable;
@@ -82,6 +83,15 @@ public interface ArgumentQueue {
    * @since 4.10.0
    */
   boolean hasNext();
+
+  /**
+   * Require that no arguments remain in this queue.
+   *
+   * @param errorMessage the error to throw if an argument remains
+   * @throws ParsingException if an argument remains
+   * @since 5.0.0
+   */
+  void requireNoMoreArguments(final String errorMessage);
 
   /**
    * Reset index to the beginning, to begin another attempt.
