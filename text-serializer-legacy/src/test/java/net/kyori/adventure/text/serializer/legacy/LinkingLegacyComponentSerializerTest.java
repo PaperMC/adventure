@@ -176,4 +176,24 @@ class LinkingLegacyComponentSerializerTest {
       .build();
     assertEquals(expectedWithSurroundingBrackets, LegacyComponentSerializer.builder().character('&').extractUrls().build().deserialize(withSurroundingBrackets));
   }
+
+  // https://github.com/PaperMC/adventure/pull/1456
+  @Test
+  void testLinkifyWithQuestionMarkOrHashtag() {
+    final String bareUrlQueryStringParameter = "https://www.youtube.com/watch?v=Z14I10MYwlM";
+    final String withQueryStringSeparator = "I just watched this video https://www.youtube.com/watch?v=Z14I10MYwlM it's quite impressive";
+    final TextComponent expectedWithQueryStringSeparator = Component.text().content("I just watched this video ")
+      .append(Component.text(bareUrlQueryStringParameter).clickEvent(ClickEvent.openUrl(bareUrlQueryStringParameter)))
+      .append(Component.text(" it's quite impressive"))
+      .build();
+    assertEquals(expectedWithQueryStringSeparator, LegacyComponentSerializer.builder().character('&').extractUrls().build().deserialize(withQueryStringSeparator));
+
+    final String bareUrlFragmentIdentifier = "https://docs.papermc.io/adventure/serializer/legacy#usage";
+    final String withFragmentIdentifier = "Check out the legacy serializer docs here: https://docs.papermc.io/adventure/serializer/legacy#usage it's pretty easy to use.";
+    final TextComponent expectedWithFragmentIdentifier = Component.text().content("Check out the legacy serializer docs here: ")
+      .append(Component.text(bareUrlFragmentIdentifier).clickEvent(ClickEvent.openUrl(bareUrlFragmentIdentifier)))
+      .append(Component.text(" it's pretty easy to use."))
+      .build();
+    assertEquals(expectedWithFragmentIdentifier, LegacyComponentSerializer.builder().character('&').extractUrls().build().deserialize(withFragmentIdentifier));
+  }
 }
